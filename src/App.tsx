@@ -1,17 +1,22 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import Api from "../Api";
 
 function App() {
 
   const [nomes, setNomes] = useState([]);
 
+  async function pegaNomes() {
+
+    const pegaNnomes = await Api.getPersons();
+    setNomes(pegaNnomes);
+    
+  }
+
   useEffect(()=>{
 
-    axios.get("https://jsonplaceholder.typicode.com/users")
-    .then(res => {
-      setNomes(res.data)
-    })
+    pegaNomes()
 
   })
 
